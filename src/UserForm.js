@@ -1,5 +1,5 @@
 import { Button, Grid, Input, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const UserForm = ({ addUser, updateUser, submitted , data , isEdit}) => {
 
@@ -42,8 +42,8 @@ const UserForm = ({ addUser, updateUser, submitted , data , isEdit}) => {
                 id='id'
                 name='id'
                 sx={{width:'400px'}}
-                value={''}
-                onChange={e =>{}}
+                value={id}
+                onChange={(e) => setID(Number(e.target.value))}
               />
            </Grid>
            <Grid item xs={12} sm={6} sx={{ display:'flex'}}>
@@ -53,8 +53,8 @@ const UserForm = ({ addUser, updateUser, submitted , data , isEdit}) => {
                 id='name'
                 name='name'
                 sx={{width:'400px'}}
-                value={''}
-                onChange={e =>{}}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
            </Grid>
            <Button
@@ -70,7 +70,10 @@ const UserForm = ({ addUser, updateUser, submitted , data , isEdit}) => {
                 backgroundColor:'#00c6e6',
              }
            }}
-           >Add</Button>
+           onClick={()=> isEdit ? updateUser({id,name}) :  addUser({id,name}) }
+           >{
+              isEdit ? 'Update' : 'Add'
+           }</Button>
       </Grid>
 
     </>
