@@ -1,20 +1,39 @@
 import { Button, Grid, Input, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const UserForm = (props) => {
+const UserForm = ({ addUser, updateUser, submitted , data , isEdit}) => {
+
+  const [id, setID] = useState(0);
+  const [name, setName] = useState('');
+
+
+  useEffect(() => {
+    if (!submitted) {
+      setID(0)
+      setName('')
+    }
+  }, [submitted]);
+
+  useEffect(() => {
+    if (data?.id && data.id !==0){
+      setID(data.id);
+      setName(data.name)
+    }
+  },[data]);
+
   return (
     <>
       <Grid
-         container
-         spacing={2}
-         sx={{
-            backgroundColor: '#ffffff',
-            marginBottom:'30px',
-            display:'block',
-         }}
+        container
+        spacing={2}
+        sx={{
+          backgroundColor: '#ffffff',
+          marginBottom: '30px',
+          display: 'block',
+        }}
       >
         <Grid item xs={12}>
-           <Typography component={'h1'} sx={{ color: '#000000'}}>User Form</Typography>
+          <Typography component={'h1'} sx={{ color: '#000000' }}>User Form</Typography>
         </Grid>
         <Grid item xs={12} sm={6} sx={{ display:'flex'}}>
               <Typography component={'label'} htmlFor='id' sx={{color:'#000000',marginRight:'20px', fontSize:'16px',width:'100px',display:'block',}}>ID</Typography>
@@ -37,7 +56,6 @@ const UserForm = (props) => {
                 value={''}
                 onChange={e =>{}}
               />
-
            </Grid>
            <Button
            sx={{
@@ -54,7 +72,7 @@ const UserForm = (props) => {
            }}
            >Add</Button>
       </Grid>
-    
+
     </>
   )
 }
